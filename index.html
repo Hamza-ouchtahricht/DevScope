@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="script.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="h-100vh  bg-slate-950 text-white">
+<header class="w-100vh bg-slate-800 rounded-2xl ">
+    <div class="w-100vh h-20  flex  justify-between px-3  py-4 ">
+        <img src="/files/devlogo.png" alt="dev_logo">
+        <div class="flex justify-between px-3 py-4 gap-3 items-center">
+             <a href="recherche.html"  class="text-white font-mono  hover:text-blue-500">Recherche</a>
+             <a href="shortist.html"  class="text-white font-mono hover:text-blue-500">Shortist</a>
+        </div>
+
+
+    </div>
+
+</header>
+<main class=" flex  items-center flex-col gap-8  justify-center bg-slate-900 text-center px-4 ">
+    <div class="flex flex-col  gap-3 mt-12">
+    <h1 class="text-white text-5xl md:text-6xl lg:text-7xl font-bold ">Trouvez les meilleurs<br>developpeurs grace a <span class="text-cyan-400">leur</span><br> <span class ="bg-gradient-to-r from-purple-400 to-pink-900 bg-clip-text text-transparent font-bold">Code</span></h1>
+    <p class="text-white">Analysez un <span class="text-cyan-400">profil</span> ses <span class="text-yellow-600">projets</span> et ses <span class="text-pink-500">langages</span> en quelques secondes</p>
+    </div>
+      <div class="flex items-center w-full  bg-[#11111a] border border-white rounded-2xl p-1.5 pl-4 shadow-lg focus-within:border-white/20 transition">
+
+    
+   
+    
+    <input 
+      type="text" 
+      placeholder="Entrez un nom d'utilisateur..." 
+      class="w-full text-gray-200 placeholder-gray-500 text-sm px-3 focus:outline-none"
+    />
+
+    
+    <button class=" flex items-center gap-1.5 bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-500 text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow-2 hover:opacity-70 transition  ">
+      <span>Analyser</span>
+    </button>
+
+</div>
+</main>
+    
+</body>
+</html>
