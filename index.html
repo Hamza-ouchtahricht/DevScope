@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="script.js" defer></script>
+    <title>DevScope</title>
+    <script  type="module"  src="script.js" defer></script>
+    <script  type="module"  src="list.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="style.css">
 </head>
@@ -26,7 +27,7 @@
     <h1 class="text-white text-5xl md:text-6xl lg:text-7xl font-bold ">Trouvez les meilleurs<br>developpeurs grace a <span class="text-cyan-400">leur</span><br> <span class ="bg-gradient-to-r from-purple-400 to-pink-900 bg-clip-text text-transparent font-bold">Code</span></h1>
     <p class="text-white">Analysez un <span class="text-cyan-400">profil</span> ses <span class="text-yellow-600">projets</span> et ses <span class="text-pink-500">langages</span> en quelques secondes</p>
     </div>
-      <div class="flex items-center w-full  bg-[#11111a] border border-white rounded-2xl p-1.5 pl-4 shadow-lg focus-within:border-white/20 transition">
+      <div class="flex items-center w-full  bg-gray-950 border border-white rounded-2xl p-1.5 pl-4 shadow-lg focus-within:border-white/20 transition">
 
     
    
@@ -35,15 +36,16 @@
       type="text" 
       placeholder="Entrez un nom d'utilisateur..." 
       class="w-full text-gray-200 placeholder-gray-500 text-sm px-3 focus:outline-none"
+      id="input_search1"
     />
 
     
-    <button class=" flex items-center gap-1.5 bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-500 text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow-2 hover:opacity-70 transition  ">
-      <span>Analyser</span>
+    <button id="search_buton" class=" flex items-center gap-1.5 bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-500 text-white text-xs font-bold px-4 py-2.5 rounded-xl shadow-2 hover:opacity-70 transition  ">
+      <span class="Analyser">Analyser</span>
     </button>
 
 </div>
 </main>
     
 </body>
-</html>
+</html>            

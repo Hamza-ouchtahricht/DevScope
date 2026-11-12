@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevScope</title>
+     <script  type="module"  src="script.js" defer></script>
+    <script  type="module"  src="list.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-slate-950 text-white font-mono">
+     
+  <div class="w-full h-auto ">
+
+    
+    <nav class="bg-slate-900 border border-slate-800 rounded-2xl px-6 py-4 flex justify-between items-center">
+    
+      <div class="flex items-center gap-3">
+         <span class="font-bold text-lg tracking-wide">DevScope</span>
+      </div>
+
+      
+      <div class="flex gap-6 text-sm">
+        <a href="recherche.html" class="text-cyan-400  font-mono">Recherche</a>
+        <a href="shortlist.html" class="text-gray-300 hover:text-white">Shortlist</a>
+      </div>
+    </nav>
+
+    
+    <div class="bg-slate-900 border border-slate-800 rounded-2xl px-4 py-2 flex items-center justify-between">
+      <div class="flex items-center gap-3 w-full">
+        
+       
+        <input 
+          type="text" 
+          value="ghadi_tkon_fiha" 
+          placeholder="Rechercher un développeur..." 
+          class="w-full text-gray-200 focus:outline-none text-sm"
+        >
+      </div>
+
+      <button class="border border-cyan-800 bg-cyan-700 text-cyan-400 px-5 py-1.5 rounded-xl text-sm hover:bg-cyan-900/50">
+        Rechercher
+      </button>
+    </div>
+
+    
+    <main class="bg-slate-900 border border-slate-800 rounded-2xl py-20 px-4 flex flex-col items-center justify-center text-center">
+      
+    
+      <div class="w-14 h-14 rounded-full border border-red-500/40 bg-red-450 flex items-center justify-center text-red-400 text-xl font-bold mb-5 shadow-2 hidden">
+        !
+      </div>
+
+      <p class="text-gray-200 font-sans font-semibold max-w-md leading-relaxed hidden">
+        Aucun développeur trouvé. Vérifiez le nom d'utilisateur et réessayez.
+      </p>
+
+    </main>
+
+  </div>
+
+</body>
+</html>
+    
+</body>
+</html>

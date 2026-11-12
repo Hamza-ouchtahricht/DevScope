@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DevScope</title>
+  <script type="module" src="script.js" defer></script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+
+
+</head>
+<body class="bg-slate-950 text-gray-200  p-4 ">
+
+  <div class=" mx-auto space-y-6">
+
+    
+    <header class="bg-slate-800 border border-gray-800/80 rounded-2xl px-6 py-4 flex items-center justify-between w-full">
+      <div class="flex items-center gap-3 w-full">
+        <span class="font-bold text-lg  text-white">DevScope</span>
+      </div>
+      <nav class="flex items-center gap-6  font-mono">
+        <a href="#" class="text-cyan-400 hover:text-cyan-300 transition">Recherche</a>
+        <a href="#" class="text-gray-400 hover:text-white transition">Shortlist</a>
+      </nav>
+    </header>
+
+    
+    <div class="bg-gray-800 border border-gray-800 rounded-2xl p-2.5 flex items-center justify-between focus-within:border-cyan-500 transition">
+      <div class="flex items-center gap-3 flex-1 px-3">
+        
+       
+        <input 
+          id="input_search" 
+          type="text" 
+          placeholder="Rechercher un utilisateur GitHub..." 
+          class="bg-transparent w-full text-sm text-gray-200 placeholder-gray-500 focus:outline-none font-mono"
+        >
+      </div>
+      <button 
+        id="button_search" 
+        class="bg-indigo-500 hover:bg-[#19303a] text-cyan-400 border border-cyan-500/30 font-mono-code text-xs px-5 py-2.5 rounded-xl transition">
+        Rechercher
+      </button>
+    </div>
+
+    
+    <main class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+
+      
+      <aside class="lg:col-span-4 bg-slate-950 border border-gray-800/80 rounded-2xl p-6 flex flex-col items-center text-center">
+        
+        <div class="relative p-1 rounded-full  shadow-2 mb-4">   
+          <div id="avatar" class="w-28 h-28 rounded-full bg-zinc-950  flex items-center justify-center border-2 border-indigo-500/75">
+        
+            <img id="user-avatar" src="" alt="" class="w-full h-full object-cover hidden">
+          </div>
+        </div>
+
+        
+        <h1 id="prfile_nom" class="text-xl font-bold text-white min-h-[28px]"></h1>
+        <p id="prfile_log" class="text-xs font-mono text-cyan-400 mt-1 uppercase tracking-wider min-h-[16px]"></p>
+
+        
+        <p id="prfile_bio" class="text-xs text-gray-400 italic mt-3 "></p>
+
+        
+        <div class="w-full bg-zinc-950 border border-gray-800/60 rounded-xl p-3.5 mt-5 space-y-2 text-left text-xs font-mono text-gray-300">
+          <div class="flex items-center gap-2.5">
+            <span class="text-pink-500">📌</span>
+            <span id="profil_localisation" class=""></span>
+          </div>
+          <div class="flex items-center gap-2.5">
+            <span class="text-gray-400">🗓️</span>
+         
+          </div>
+        </div>
+
+        
+        <div class="w-full grid grid-cols-3 gap-2.5 mt-4">
+          <div class="bg-[#141822] border border-gray-800/60 rounded-xl p-3 flex flex-col items-center justify-center">
+            <span id="stat-repos" class="text-lg font-bold text-cyan-400 font-mono-code min-h-[28px]"></span>
+            <span class="text-[10px] text-gray-500 uppercase tracking-wider mt-1">Dépôts</span>
+          </div>
+          <div class="bg-[#141822] border border-gray-800/60 rounded-xl p-3 flex flex-col items-center justify-center">
+            <span id="stat-followers" class="text-lg font-bold text-pink-500 font-mono-code min-h-[28px]"></span>
+            <span class="text-[10px] text-gray-500 uppercase tracking-wider mt-1">Abonnés</span>
+          </div>
+          <div class="bg-[#141822] border border-gray-800/60 rounded-xl p-3 flex flex-col items-center justify-center">
+            <span id="stat-following" class="text-lg font-bold text-gray-200 font-mono-code min-h-[28px]"></span>
+            <span class="text-[10px] text-gray-500 uppercase tracking-wider mt-1">Abonnements</span>
+          </div>
+        </div>
+
+        
+        <button id="button_short" class="w-full mt-5 py-3 rounded-xl font-semibold text-xs text-white bg-indigo-500 hover:opacity-95 transition shadow-lg shadow-cyan-500/10 flex items-center justify-center gap-1.5">
+          <span>★</span> Ajouter à la shortlist
+        </button>
+
+        <a id="prfile_link" href="#" target="_blank" class="w-full mt-3 py-2.5 rounded-xl font-mono text-xs text-gray-300 bg-transparent border border-gray-800 hover:border-gray-700 hover:bg-[#141822] transition flex items-center justify-center gap-1.5">
+          Voir le profil original <span>↗</span>
+        </a>
+
+      </aside>
+
+      
+      <section class="lg:col-span-8 bg-[#0f121a] border border-gray-800/80 rounded-2xl p-6 min-h-[540px]">
+        
+        
+        <div class="flex items-center gap-3 mb-6">
+          <h2 class="text-xl font-bold text-white">Dépôts</h2>
+          <span id="repos-badge-count" class="bg-[#122229] text-cyan-400 border border-cyan-500/30 font-mono-code text-xs px-2.5 py-0.5 rounded-full min-w-[28px] text-center"></span>
+        </div>
+
+    
+        <div id="repos-container" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          
+          
+          <div class="bg-[#141822]/70 border border-gray-800/80 hover:border-gray-700 rounded-xl p-5 flex flex-col justify-between space-y-4 transition">
+            <div>
+              <div class="flex items-center gap-2 text-white font-semibold text-sm">
+                <span class="text-cyan-400 font-mono-code">🗂️</span>
+                <span class="repo-name truncate min-h-[20px]"></span>
+              </div>
+              <p class="repo-desc text-xs text-gray-400 mt-2 line-clamp-2 min-h-[16px]"></p>
+            </div>
+
+            <div class="space-y-2 pt-2">
+              <div class="flex items-center gap-4 text-xs font-mono-code">
+                <span class="repo-lang text-gray-300 flex items-center gap-1 min-h-[16px]"></span>
+                <span class="repo-stars text-yellow-500 flex items-center gap-1">★ <span class="stars-count"></span></span>
+                <span class="repo-forks text-cyan-400 flex items-center gap-1">⑂ <span class="forks-count"></span></span>
+              </div>
+              <p class="repo-updated text-[11px] font-mono- text-gray-500 min-h-[16px]"></p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+</body>
+</html>
