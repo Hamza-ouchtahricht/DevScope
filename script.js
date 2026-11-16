@@ -1,4 +1,12 @@
 
+  import {MOCKAPI_URL} from"./config.js";
+
+  
+
+
+  
+
+
   import { input_search1 } from "./list.js";
 
   // import{user_name} from "./list.js";
@@ -8,6 +16,8 @@
 import{button_serch1} from "./list.js" ;
 ;
 let user_name = sessionStorage.getItem("username") || "" ;
+
+
 const input_search2 = document.querySelector("#input_search2");
 if(input_search2 && user_name){
   input_search2.value = user_name;
@@ -58,6 +68,7 @@ async function fetchData(){
                        
        if(!response.ok){
      throw new Error("Erreur HTTP : " + response.status);
+     
     
     
  }
@@ -99,7 +110,7 @@ if (userAvatar) {
 
   if(data.bio!=null){
 
-    prfile_bio = data.bio;
+    prfile_bio.textContent = data.bio;
   }
   }
  
@@ -150,43 +161,60 @@ if (userAvatar) {
 
    console.log(user_name);
 
-//     if(button_voir){
-// button_voir.addEventListener("click", (e) =>{
-//    e.preventDefault();
+// hna anmchi nchof data li kayna f mock api wach deja t3awdat
+   const button_shortlist = document.querySelector("#button_short");
+   if(button_shortlist){
+    button_shortlist.addEventListener("click", async (e) => {
+      e.preventDefault();
+    
+
+      const candidat = {
+        login: data.login,
+        name: data.name || data.login,
+        avatar_url: data.avatar_url,
+        html_url: data.html_url,
+        language: data.language,
+        rating : data.rating,
+        createdAt: data.created_at
+
+
+      };
+      try {
+        const cheack_res = await fetch(MOCKAPI_URL);
+        const cheack_json = await cheack_res.json();
+        const deja = cheack_json.find(candid =>
+          candid.login === data.login);
+          if(deja) {
+            alert(data.login + "candidats deja on shortlist!");
+            return;
+          }
+          const respon_mock = await fetch (MOCKAPI_URL, {
+            method: "POST" ,
+            headers: { "Content-Type" : "application/json"},
+            body: JSON.stringify(candidat)
+          });
+
+          if(!respon_mock.ok) throw new Error("Erreur POST :" +respon_mock.status );
+          alert(data.login + "add to shortlist ");
+        }
+        catch(err){
+
+        }
+      });
+
+
+
+        
+      }
+      
+    }
+
    
- 
-//    window.open("./show.html", "_blank");
-// }
-// );
-
-
-
-//  }
-}
 
 
 
 
 
-
-
-
-   
-
-
-
-
-//  document.querySelector("#user-avatar").src = data.avatar_url;
-//     document.querySelector("#name").textContent = data.name;
-
-
-
-
-
-//   data.forEach(element => {
-//      console.log(element.name)
-   
-//   });
    
    catch (error){
      console.error("Failed to fetch data:", error.message);
@@ -369,3 +397,8 @@ if (userAvatar) {
  fetchData();
 
 fetchrepo();
+
+
+
+
+

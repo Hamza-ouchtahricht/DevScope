@@ -1,15 +1,120 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DevScope</title>
-    <script src="script.js" defer></script>
-    <script src ="list.js" defer ></script>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link rel="stylesheet" href="style.css">
+    <title>shortist</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script type="module" src="shortlist.js" defer></script>
 </head>
-<body>
+<body class="bg-gray-950 text-white min-h-screen font-mono selection : bg-cyan-500 selection:text-black">
+<header class="bg-slate-800 border border-gray-800/80 rounded-2xl px-6 py-4 flex items-center justify-between w-full">
+      <div class="flex items-center gap-3 w-full">
+        <span class="font-bold text-lg  text-white">DevScope</span>
+      </div>
+      <nav class="flex items-center gap-6  font-mono">
+        <a href="show.html" class=" text-gray-400 hover:">Recherche</a>
+        <a href="shortist.html" class="text-cyan-400 hover:text-white transitiontext-cyan-300 transition">Shortlist</a>
+      </nav>
+    </header>
+<main class="max-w-5xl mx-auto px-4 py-12">
+<div class="mb-8">
+      <h1 class="text-4xl font-bold text-cyan-400  mb-2">Ma shortlist</h1>
+      
+    </div>
+
     
+    <div class="flex flex-wrap items-center justify-between gap-4 mb-8">
+      
+      <div class="flex flex-wrap items-center gap-1 bg-slate-900 p-1.5 rounded-full border border-slate-800 text-xs font-mono">
+        <button class="filter-btn px-4 py-1.5 rounded-full bg-cyan-500 text-white font-semibold shadow-sm" data-status="Tous">
+          Tous
+        </button>
+        <button class="filter-btn px-4 py-1.5 rounded-full text-gray-400 hover:text-white transition" data-status="À contacter">
+          À contacter
+        </button>
+        <button class="filter-btn px-4 py-1.5 rounded-full text-gray-400 hover:text-white transition" data-status="Entretien">
+          Entretien
+        </button>
+        <button class="filter-btn px-4 py-1.5 rounded-full text-gray-400 hover:text-white transition" data-status="Retenu">
+          Retenu
+        </button>
+        <button class="filter-btn px-4 py-1.5 rounded-full text-gray-400 hover:text-white transition" data-status="Refusé">
+          Refusé
+        </button>
+      </div>
+
+      
+      <div class="w-full sm:w-64">
+        <input 
+          type="text" 
+          id="search-candidat" 
+          placeholder="Rechercher un candidat..." 
+          class="w-full bg-slate-900 border border-slate-800 rounded-xl px-4 py-2.5 text-xs font-mono text-white placeholder-gray-500 focus:outline-none focus:border-cyan-400 transition"
+        />
+      </div>
+    </div>
+
+    
+    <div id="shortlist_con" class="space-y-4">
+
+      
+      <div class="candidat-card bg-slate-900 border border-slate-800 hover:border-slate-700 rounded-2xl p-5 flex flex-wrap items-center justify-between gap-4 transition">
+        
+        
+        <div class="flex items-center gap-4">
+          
+          <div class="relative p-0.5 rounded-full bg-cyan-500">
+            <img 
+              src="" 
+              alt="" 
+              class="candidat_avatar w-14 h-14 rounded-full bg-slate-950 " 
+            />
+          </div>
+
+        
+          <div class="space-y-1">
+            
+            <h3 class="candidat-name text-white font-bold text-base h-5"></h3>
+            
+            
+            <div class="flex items-center gap-2 font-mono text-xs">
+              <span class="candidat-login text-gray-400 h-4"></span>
+              <span class="candidat-lang bg-cyan-950 text-cyan-400 border border-cyan-800 text-xs px-2 py-0.5 rounded"></span>
+            </div>
+
+            
+            <p class="candidat-note text-gray-400 text-xs italic font-mono h-4"></p>
+
+            
+            <p class="candidat-date text-gray-500 text-xs font-mono h-4"></p>
+          </div>
+        </div>
+
+        
+        <div class="flex flex-wrap items-center gap-3 font-mono text-xs">
+          
+          <div class="candidat-stars text-lime-400 tracking-widest text-sm mr-1"></div>
+
+          
+          <span class="candidat-status px-3 py-1 rounded-full text-xs border border-cyan-800 bg-cyan-950 text-cyan-400 flex items-center gap-1"></span>
+
+          
+          <button class="btn-modifier px-3 py-1.5 rounded-lg text-cyan-400 border border-cyan-800 bg-cyan-950/30 hover:bg-cyan-900/50 transition flex items-center gap-1">
+            ✎ Modifier
+          </button>
+
+          
+          <button class="btn-supprimer px-3 py-1.5 rounded-lg text-red-400 border border-red-900 bg-red-950/30 hover:bg-red-900/50 transition flex items-center gap-1">
+            ✕ Supprimer
+          </button>
+        </div>
+
+      </div>
+      
+
+    </div>
+
+</main>
 </body>
-</html> -->
+</html>
