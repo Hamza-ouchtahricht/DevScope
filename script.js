@@ -1,23 +1,67 @@
 
+  import {MOCKAPI_URL} from"./config.js";
+
   import { input_search1 } from "./list.js";
 
-  import{user_name} from "./list.js";
+  // import{user_name} from "./list.js";
 
 // import{analyser} from "./list.js";
 
 import{button_serch1} from "./list.js" ;
 ;
+let main_show = document.querySelector(".main_show");
+let select_repo = document.querySelector("#depo_langague");
+if(select_repo){
+  select_repo.addEventListener("change" , () => {
+    const choix = select_repo.value;
+    let filtres ;
+    if(choix === "touts" || choix === ""){
+      filtres = touts; 
+    } else {
+      filtres = touts.filter(repo => repo.language === choix);
+    }
+     affiche_repo(filtres);
+  });
+
+
+}
 
 
 
+let touts = [];
+ 
+let user_name = sessionStorage.getItem("username") || "" ;
+
+
+const input_search2 = document.querySelector("#input_search2");
+if(input_search2 && user_name){
+  input_search2.value = user_name;
+}
+let button_search2 = document.querySelector("#button_search2");
+
+if(button_search2){
+  button_search2.addEventListener("click", (e) =>{
+    e.preventDefault();
+  
+ user_name = input_search2.value.trim() 
+  fetchData();
+  fetchrepo();
+  })
+}
 
 
 if(button_serch1){
 button_serch1.addEventListener("click", (e) =>{
    e.preventDefault();
+
+   user_name = input_search1.value.trim();
+  if(user_name){
+    sessionStorage.setItem("username", user_name);
+      
+  }
    
  
-   window.open("./show.html", "_blank");
+   window.open("./show.html", "_blank"); 
 }
 );
   }
@@ -27,22 +71,25 @@ button_serch1.addEventListener("click", (e) =>{
 async function fetchData(){
 
          try{
-            //  const token = "" ;
+               const token = "" ;
+               
                     const response = await fetch(`https://api.github.com/users/${user_name}`
+                      
                     ,{
-                      // headers: {
-                      //            'Authorization': `token ${token}`
-                      //           }
+                        headers: {
+                                   'Authorization': `token ${token}`
+                                  }
 
                     }) 
-                     //  const repo = await fetch(`https://api.github.com/users/${user_name}/repos`); 
-                     //  console.log(repo.name);
+                       
        if(!response.ok){
      throw new Error("Erreur HTTP : " + response.status);
+     
     
     
  }
    console.log(response.status);
+   console.log(user_name);
      
   const data = await response.json(); 
  console.log(data);
@@ -55,6 +102,10 @@ let profile_log = document.querySelector("#prfile_log");
 let prfile_bio = document.querySelector("#prfile_bio");
 let profil_localisation = document.querySelector("#profil_localisation");
 let profil_cree = document.querySelector("#profil_cree");
+
+if(profil_localisation){
+  profil_localisation.textContent = data.location || "Aucunt Localisation"
+}
 
 
 
@@ -75,7 +126,7 @@ if (userAvatar) {
 
   if(data.bio!=null){
 
-    prfile_bio = data.bio;
+    prfile_bio.textContent = data.bio;
   }
   }
  
@@ -91,11 +142,6 @@ if (userAvatar) {
 
   const stat_folowing = document.querySelector("#stat-following");
 
-
-
-
-
-  
 
    
    if(profil_cree) {
@@ -119,46 +165,59 @@ if (userAvatar) {
 
     }
 
-    const button_voir = document.querySelector("#prfile_link");
+  const profil_link = document.getElementById("prfile_link");
 
-    if(button_voir){
-button_voir.addEventListener("click", (e) =>{
-   e.preventDefault();
-   
+   profil_link.href = `https://github.com/${user_name}`;
+
+   console.log(user_name);
+
+// hna anmchi nchof data li kayna f mock api wach deja t3awdat
+   const button_shortlist = document.querySelector("#button_short");
+   if(button_shortlist){
+    button_shortlist.addEventListener("click", async (e) => {
+      e.preventDefault();
+    
+      const candidat = {
+        login: data.login,
+        name: data.name || data.login,
+        avatar_url: data.avatar_url,
+        html_url: data.html_url,
+        language: data.language,
+        rating : data.rating,
+        createdAt: data.created_at
+
+
+      };
+      try {
+        const cheack_res = await fetch(MOCKAPI_URL);
+        const cheack_json = await cheack_res.json();
+        const deja = cheack_json.find(candid =>
+          candid.login === data.login);
+          if(deja) {
+            alert(data.login + "candidats deja on shortlist!");
+            return;
+          }
+          const respon_mock = await fetch (MOCKAPI_URL, {
+            method: "POST" ,
+            headers: { "Content-Type" : "application/json"},
+            body: JSON.stringify(candidat)
+          });
+
+          if(!respon_mock.ok) throw new Error("Erreur POST :" +respon_mock.status );
+          alert(data.login + "add to shortlist ");
+        }
+        catch(err){
+
+        }
+      });
+
+
+
+        
+      }
+      
+    }
  
-   window.open("./show.html", "_blank");
-}
-);
-
-
-
- }
-}
-
-
-
-
-
-
-
-
-   
-
-
-
-
-//  document.querySelector("#user-avatar").src = data.avatar_url;
-//     document.querySelector("#name").textContent = data.name;
-
-
-
-
-
-//   data.forEach(element => {
-//      console.log(element.name)
-   
-//   });
-   
    catch (error){
      console.error("Failed to fetch data:", error.message);
       throw error;
@@ -166,8 +225,139 @@ button_voir.addEventListener("click", (e) =>{
 
    }
 
-  
+
 }
 
+ async function fetchrepo(){
+
+          try{
+              const token = "" ;
+
+              
+                     const res = await fetch(`https://api.github.com/users/${user_name}/repos`
+                     ,{
+                       headers: {
+                                   'Authorization': `token ${token}`
+                                  }
+                    
+
+                     }) 
+                       
+        if(!res.ok){
+      throw new Error("Erreur HTTP : " + res.status);
+    
+    
+  }
+    console.log(res.status);
+     
+   const repos = await res.json(); 
+  console.log(repos);
+  touts = repos;
+     affiche_repo(touts);
+  
+     }
+
+    catch (error){
+      console.error("Failed to fetch data:", error.message);
+       throw error;
+    }
+ }
+
+
+ function affiche_repo (liste) {
+ 
+
+ const repos_cont = document.querySelector("#repos_cont");
+
+ if(repos_cont) {
+  repos_cont.textContent = liste.length ;
+  }
+
+  const repo_details = document.getElementById("repos-container");
+   
+  repo_details.innerHTML = "" ;
+
+
+    for(let i = 0; i<liste.length ;i++){
+       repo_details.innerHTML += `<div class="bg-[#141822]/70 border border-gray-800/80 hover:border-gray-700 rounded-xl p-5 flex flex-col justify-between space-y-4 transition">
+             <div>
+               <div class="flex items-center gap-2 text-white font-semibold text-sm">
+                 <span class="text-cyan-400 font-mono" >🗂️</span>
+                 <span class="repo-name truncate min-h-[20px] test" ></span>
+               </div>
+               <p class="repo_desc text-xs text-gray-400 mt-2 line-clamp-2 min-h-[16px]"></p>
+             </div>
+
+             <div class="space-y-2 pt-2">
+               <div class="flex items-center gap-4 text-xs font-mono">
+                 <span class="repo_lang text-gray-300 flex items-center gap-1 min-h-[16px]"></span>
+                 <span class="repo_stars text-yellow-500 flex items-center gap-1"> <span class="stars-count"></span></span>
+                 <span class="repo_forks text-cyan-400 flex items-center gap-1"> <span class="forks-count"></span></span>
+               </div>
+               <p class="repo_updated text-[11px] font-mono- text-gray-500 min-h-[16px]"></p>
+             </div>
+           </div> `;
+           
+            
+    }
+
+     let name_tes = document.querySelectorAll(".test");
+     let desc = document.querySelectorAll(".repo_desc");
+     let language = document.querySelectorAll(".repo_lang");
+     let repo_stars = document.querySelectorAll(".repo_stars");
+     let repo_forks = document.querySelectorAll(".repo_forks");
+     let repo_updated = document.querySelectorAll(".repo_updated");
+
+    console.log(name_tes.length)
+     for(let i = 0 ; i< liste.length ;i++){
+
+      name_tes[i].textContent = liste[i].name
+      desc[i].textContent =liste[i].description || "Aucune description."
+      language[i].textContent =liste[i].language
+       repo_stars[i].textContent= `★ ${liste[i].stargazers_count}`;
+       repo_forks[i].textContent = `⑂  ${liste[i].forks_count}`;
+      
+        let date_repo = new Date(liste[i].updated_at);
+        let lyoma = new Date();
+        console.log(lyoma);
+        let diff_days = lyoma - date_repo;
+        let diff = Math.floor(diff_days / (1000 * 60 * 60 * 24));
+
+        
+          repo_updated[i].textContent = `Mis a jour il ya ${diff} jour`;
+     }
+    
+     main_show.classList.remove("hidden");
+
+ }
+
+  let input_search_name_lange = document.querySelector("#input_depo");
+ 
+  if(input_search_name_lange) {
+   input_search_name_lange.addEventListener("keyup" , affiche_name_repo) ;
+
+  }
+  function affiche_name_repo() {
+  let langandrepo = input_search_name_lange.value.trim().toLowerCase();
+  if(langandrepo === "") {
+    affiche_repo(touts);
+    return;
+  }
+  let filtres = touts.filter(repo =>{
+    const nom_input = repo.name.toLowerCase().includes(langandrepo);   //hada dakchi lighadi yktb l user
+    const lang_input = repo.language && repo.language.toLowerCase().includes(langandrepo);
+    return nom_input || lang_input ;
+
+  });
+  affiche_repo(filtres);
+
+  }
 
  fetchData();
+
+fetchrepo();
+
+
+
+
+
